@@ -133,6 +133,20 @@
 [data-theme='light'] .form-select:focus {
   border-color: #bf5c22;
 }
+.form-control:disabled,
+.form-select:disabled {
+  background-color: #25252c;
+  border-color: #36363f;
+  color: #b8c0cf;
+  opacity: 1;
+  cursor: not-allowed;
+}
+[data-theme='light'] .form-control:disabled,
+[data-theme='light'] .form-select:disabled {
+  background-color: #f0ebe5;
+  border-color: #d9cfc5;
+  color: #736b63;
+}
 .detail-form .star-half input {
   position: absolute;
   inset: 0;
