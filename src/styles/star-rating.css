@@ -1,0 +1,86 @@
+.star-rating {
+  border: 0;
+  padding-top: 0;
+}
+.star-rating legend {
+  float: none;
+  width: auto;
+  padding: 0;
+  margin: 0 0 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.star-options {
+  display: flex;
+  gap: 2px;
+  width: max-content;
+}
+.star-graphic {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.star-empty {
+  fill: #56535b;
+}
+.star-filled {
+  fill: #ffad55;
+}
+.star-rating .star-half {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.star-rating .right-half {
+  left: 50%;
+}
+.star-half:has(input:focus-visible) {
+  outline: 2px solid #ff7a36;
+  outline-offset: 0;
+  background: #ff7a3612;
+}
+.star-rating-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--muted);
+  min-height: 18px;
+}
+.star-rating-caption button {
+  font-size: 9px;
+  background: none;
+  border: 0;
+  color: #ffad79;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.star-summary {
+  display: inline-flex;
+  gap: 1px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.star-summary .star-graphic {
+  width: 12px;
+  height: 14px;
+}
+[data-theme='light'] .star-filled {
+  fill: #a95400;
+}
+[data-theme='light'] .star-empty {
+  fill: #c2b8b0;
+}
+[data-theme='light'] .star-rating-caption button {
+  color: #a94a18;
+}

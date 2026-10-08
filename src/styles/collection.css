@@ -1,0 +1,142 @@
+.collection-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 0 0 24px;
+}
+.favorites-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  min-height: 44px;
+}
+.favorites-filter input {
+  accent-color: #ff7a28;
+  width: 18px;
+  height: 18px;
+}
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted, #929298);
+}
+.seasons-editor legend {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.seasons-editor > label {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.seasons-editor small,
+.season-total small {
+  font-size: 12px;
+  color: var(--muted, #929298);
+}
+.season-total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.season-total strong {
+  font-size: 24px;
+}
+.date-suggestion,
+.undo-notice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border: 1px solid #ff7a2855;
+  background: #25201d;
+  color: #faf8f5;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.date-suggestion span,
+.undo-notice span {
+  flex: 1;
+  min-width: 120px;
+}
+.date-suggestion .text-button,
+.undo-notice .text-button {
+  color: #ffa563;
+  min-height: 32px;
+}
+.collection-notices {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  display: grid;
+  gap: 8px;
+}
+.collection-notices:not(:empty) ~ .toast-message {
+  bottom: 118px;
+}
+[data-theme='light'] .date-suggestion,
+[data-theme='light'] .undo-notice {
+  background: #fff4e9;
+  color: #29211b;
+  border-color: #c95b2455;
+  box-shadow: 0 4px 24px #3a250a12;
+}
+[data-theme='light'] .date-suggestion .text-button,
+[data-theme='light'] .undo-notice .text-button {
+  color: #a9410a;
+}
+@media (max-width: 575px) {
+  .sort-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .collection-notices {
+    bottom: 12px;
+    width: calc(100vw - 24px);
+  }
+  .seasons-editor > label {
+    grid-template-columns: 1fr 65px 1fr;
+  }
+}
+.add-episode {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  line-height: 1;
+}
+.add-episode svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (pointer: coarse) {
+  .add-episode {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+}

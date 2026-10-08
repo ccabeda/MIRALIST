@@ -1,0 +1,75 @@
+{
+  "dragonball": {
+    "title": "Dragon Ball",
+    "category": "Anime",
+    "format": "TV",
+    "aliases": ["Dragon Ball", "ドラゴンボール"]
+  },
+  "dragonballsuper": {
+    "title": "Dragon Ball Super",
+    "category": "Anime",
+    "format": "TV"
+  },
+  "frieren": {
+    "title": "Frieren",
+    "category": "Anime",
+    "format": "TV",
+    "aliases": ["Sousou no Frieren", "葬送のフリーレン"]
+  },
+  "dune": {
+    "title": "Dune: Parte dos",
+    "category": "Películas",
+    "format": "Película"
+  },
+  "severance": {
+    "title": "Severance",
+    "category": "Series",
+    "format": "Serie"
+  },
+  "bebop": {
+    "title": "Cowboy Bebop",
+    "category": "Anime",
+    "format": "TV"
+  },
+  "yourname": {
+    "title": "Your Name",
+    "category": "Anime",
+    "format": "Película",
+    "aliases": ["Kimi no Na wa.", "君の名は。"]
+  },
+  "pluto": {
+    "title": "PLUTO",
+    "category": "Anime",
+    "format": "ONA"
+  },
+  "flcl": {
+    "title": "FLCL",
+    "category": "Anime",
+    "format": "OVA"
+  },
+  "interstellar": {
+    "title": "Interstellar",
+    "category": "Películas",
+    "format": "Película"
+  },
+  "aot": {
+    "title": "Attack on Titan",
+    "category": "Anime",
+    "format": "OVA"
+  },
+  "euphoria": {
+    "title": "Euphoria",
+    "category": "Series",
+    "format": "Especial"
+  },
+  "littlewitch": {
+    "title": "Little Witch Academia",
+    "category": "Anime",
+    "format": "Película"
+  },
+  "drstone": {
+    "title": "Dr. Stone: Ryusui",
+    "category": "Anime",
+    "format": "Especial"
+  }
+}

@@ -1,0 +1,195 @@
+.release-calendar {
+  padding: 24px 0 40px;
+}
+.release-calendar-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.release-calendar-heading h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  margin: 8px 0;
+}
+.release-calendar-heading .btn {
+  flex-shrink: 0;
+}
+.release-calendar-coverage {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 16px 0 24px;
+}
+.release-calendar-toolbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+.release-calendar-toolbar label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.release-calendar-toolbar select {
+  margin-top: 6px;
+  min-width: 150px;
+}
+.release-calendar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 24px;
+}
+.release-calendar-month,
+.release-calendar-agenda {
+  border: 1px solid var(--line);
+  background: #1b1b1f;
+  padding: 20px;
+  border-radius: 12px;
+}
+.release-month-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.release-month-heading h2 {
+  font-size: 21px;
+  margin: 0;
+}
+.release-month-heading button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  border-radius: 6px;
+  font-size: 24px;
+}
+.release-calendar-weekdays,
+.release-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+.release-calendar-weekdays {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.release-calendar-days button {
+  min-height: 72px;
+  min-width: 0;
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: #242429;
+  color: inherit;
+  font-size: 14px;
+}
+.release-calendar-days button small {
+  color: #ffab7a;
+  font-size: 9px;
+}
+.release-calendar-days button.outside-month {
+  color: var(--muted);
+  background: transparent;
+}
+.release-calendar-days button.is-today {
+  border-color: #aa623d;
+}
+.release-calendar-days button[aria-pressed='true'] {
+  background: #ff7a36;
+  color: #171717;
+  font-weight: 800;
+}
+.release-calendar-days button[aria-pressed='true'] small {
+  color: #171717;
+}
+.release-calendar-days button:hover {
+  outline: 1px solid #ff7a36;
+}
+.release-calendar-agenda h2 {
+  font-size: 22px;
+  margin: 10px 0 24px;
+}
+.release-calendar-agenda .related-grid {
+  grid-template-columns: 1fr;
+}
+.release-calendar-agenda .related-grid button {
+  min-width: 0;
+}
+.release-calendar-agenda .related-grid strong {
+  overflow-wrap: anywhere;
+}
+[data-theme='light'] .release-calendar-month,
+[data-theme='light'] .release-calendar-agenda {
+  background: #fff;
+}
+[data-theme='light'] .release-calendar-days button {
+  background: #f5f1ed;
+}
+[data-theme='light'] .release-calendar-days button small {
+  color: #a34b1a;
+}
+[data-theme='light'] .release-calendar-days button[aria-pressed='true'] {
+  background: #ff7a36;
+}
+[data-theme='light'] .release-calendar-days button[aria-pressed='true'] small {
+  color: #171717;
+}
+@media (max-width: 1000px) {
+  .sidebar {
+    height: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 16px 20px 0;
+    gap: 0;
+  }
+  .sidebar nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    height: auto;
+    margin-top: 12px;
+    overflow-x: auto;
+    min-width: 0;
+  }
+  .sidebar .nav-item {
+    padding: 13px 12px;
+  }
+  .navigation-actions {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+@media (max-width: 850px) {
+  .release-calendar-layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 500px) {
+  .release-calendar-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .release-calendar-month,
+  .release-calendar-agenda {
+    padding: 12px;
+  }
+  .release-calendar-days {
+    gap: 3px;
+  }
+  .release-calendar-days button {
+    min-height: 58px;
+  }
+  .release-count-label {
+    display: none;
+  }
+}

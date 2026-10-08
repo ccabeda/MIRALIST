@@ -1,0 +1,55 @@
+.chapter-total {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.movie-progress {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+.movie-progress label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 11px;
+  border: 1px solid var(--line);
+  width: 100%;
+  min-height: 42px;
+  color: inherit;
+}
+.movie-progress input {
+  accent-color: #ff7a36;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  flex-shrink: 0;
+}
+.watch-dates {
+  border: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 22px;
+}
+.watch-dates legend {
+  float: none;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 9px;
+  width: auto;
+  padding-right: 12px;
+}
+.watch-dates input[type='date'] {
+  min-width: 0;
+  width: 100%;
+  min-height: 41px;
+}
+@media (max-width: 575px) {
+  .movie-progress {
+    padding-top: 0;
+  }
+  .watch-dates {
+    padding-top: 12px;
+  }
+}

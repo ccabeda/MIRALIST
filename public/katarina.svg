@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Katarina — MiráList</title>
+  <defs><linearGradient id="hair" x2=".8" y2="1"><stop stop-color="#fa3356"/><stop offset="1" stop-color="#850e32"/></linearGradient></defs>
+  <path fill="#231525" d="M9 53C2 43 5 27 10 17 17 1 41-2 52 12c10 13 9 32 3 42L42 62H22Z"/>
+  <path fill="url(#hair)" d="M6 45C4 25 14 5 32 4c21-1 28 18 26 38l-8 14-9-4 6-27-7-8-19 13-3 25-9-3 4-12Z"/>
+  <path fill="#eac1b1" d="m20 24 18-9 9 12-3 17-12 11-11-10-4-14Z"/>
+  <path fill="#c69691" d="m39 22 8 5-3 17-12 11 5-14Z"/>
+  <path fill="#ad1740" d="M12 33C9 10 31 2 45 13 32 12 31 25 12 37Zm30-19c9 3 13 18 12 32l-9 10 3-28Z"/>
+  <path fill="#f74760" d="M12 26C17 9 32 7 40 12 27 11 27 20 12 26Z"/>
+  <path stroke="#3a2735" stroke-width="2.7" stroke-linecap="round" d="m21 31 8 1m6-1 7-2"/>
+  <path stroke="#a2ed71" stroke-width="2.6" stroke-linecap="round" d="m23 33 4 .5m10-1 4-1"/>
+  <path stroke="#833b46" stroke-width="1.6" d="m39 24-2 18"/>
+  <path stroke="#9d4b59" stroke-width="1.7" stroke-linecap="round" d="m29 44 7-1"/>
+  <path fill="#20232c" d="m21 47 11 8 12-10 9 12c-10 9-31 9-42 0Z"/>
+  <path fill="#abb7c8" d="m20 48 8 12-14-6Zm24-1-7 14 15-7Z"/>
+</svg>

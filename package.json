@@ -1,0 +1,29 @@
+{
+  "name": "miralist",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test src/tests/*.test.js",
+    "format": "prettier --write src server vite.config.js index.html package.json .prettierrc.json eslint.config.js",
+    "format:check": "prettier --check src server vite.config.js index.html package.json .prettierrc.json eslint.config.js",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
+    "prettier": "3.6.2",
+    "vite": "^7.1.0"
+  }
+}

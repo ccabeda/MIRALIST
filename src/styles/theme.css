@@ -1,0 +1,163 @@
+/* Mismo interruptor y comportamiento de Grieta Skins, adaptado a React. */
+:root {
+  color-scheme: dark;
+}
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.tema-boton {
+  width: 58px;
+  height: 32px;
+  flex-shrink: 0;
+  padding: 3px;
+  border: 1px solid #d6c7ae;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.92);
+  box-shadow: 0 8px 24px #291c101f;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+.tema-boton:hover {
+  transform: translateY(-1px);
+}
+.tema-boton::before {
+  content: '☀';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #8d5f12;
+  background: #ffd469;
+  border-radius: 50%;
+  transform: translateX(0);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+.tema-boton.is-dark {
+  background: rgba(20, 20, 20, 0.96);
+  border-color: #303030;
+}
+.tema-boton.is-dark::before {
+  content: '☾';
+  color: #e5e7eb;
+  background: #3a3a3a;
+  transform: translateX(26px);
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+  --accent: #43751e;
+  --muted: #506176;
+  --line: #d3dde8;
+  background: #f4f6fa;
+  color: #162437;
+}
+[data-theme='light'] body {
+  background: #f4f6fa;
+  color: #162437;
+}
+[data-theme='light'] .sidebar {
+  background: #fff;
+}
+[data-theme='light'] .brand-icon,
+[data-theme='light'] .btn-accent {
+  background: #b7f36b;
+  color: #1d2b13;
+}
+[data-theme='light'] .nav-item {
+  color: #506176;
+}
+[data-theme='light'] .nav-item.active {
+  background: #e7f2dd;
+  color: #38651a;
+}
+[data-theme='light'] .nav-item:hover {
+  background: #edf2e9;
+}
+[data-theme='light'] .nav-item small {
+  border-color: #b6c8ab;
+}
+[data-theme='light'] .demo-user > span {
+  background: #e6ebf2;
+}
+[data-theme='light'] .breadcrumb b {
+  color: #162437;
+}
+[data-theme='light'] .breadcrumb,
+[data-theme='light'] .nav-caption,
+[data-theme='light'] .sidebar-bottom p,
+[data-theme='light'] .demo-banner,
+[data-theme='light'] .result-count,
+[data-theme='light'] .catalog .eyebrow,
+[data-theme='light'] footer {
+  color: #58687b;
+}
+[data-theme='light'] .demo-pill {
+  color: #416a26;
+  border-color: #bacead;
+  background: #eef6e8;
+}
+[data-theme='light'] .hero {
+  color: #f2f4f0;
+}
+[data-theme='light'] .hero .eyebrow {
+  color: #b7f36b;
+}
+[data-theme='light'] .continue-card {
+  background: #fff;
+}
+[data-theme='light'] .episode-label {
+  color: #3c4f65;
+}
+[data-theme='light'] .progress {
+  background: #dde6d6;
+}
+[data-theme='light'] .add-episode {
+  background: #e8f3dd;
+  border-color: #b9ccab;
+}
+[data-theme='light'] .mini-poster {
+  color: #f6f8fb;
+}
+[data-theme='light'] .text-button {
+  color: #446c2c;
+}
+[data-theme='light'] .footer-brand {
+  color: #42672d;
+}
+[data-theme='light'] .btn-outline-light {
+  color: #3f542f;
+  border-color: #829674;
+}
+[data-theme='light'] .btn-outline-light:hover {
+  background: #e6efde;
+}
+[data-theme='light'] .empty-state h3 {
+  color: #162437;
+}
+@media (max-width: 440px) {
+  .topbar-actions {
+    gap: 10px;
+  }
+  .demo-pill {
+    font-size: 8px;
+    padding: 6px 8px;
+  }
+  .breadcrumb {
+    font-size: 10px;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tema-boton,
+  .tema-boton::before {
+    transition: none;
+  }
+}

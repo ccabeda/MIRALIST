@@ -1,0 +1,230 @@
+.detail-navigation {
+  display: flex;
+  gap: 22px;
+  border-bottom: 1px solid var(--line);
+  margin: 22px 0;
+}
+.detail-navigation button {
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 12px 0;
+  color: var(--muted);
+}
+.detail-navigation button[aria-pressed='true'] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.catalog-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 24px 0 12px;
+}
+.catalog-facts > div {
+  border-top: 1px solid var(--line);
+  padding: 14px 12px 14px 0;
+}
+.catalog-facts dt {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.catalog-facts dd {
+  font-size: 14px;
+  margin: 0;
+}
+.catalog-facts .unavailable {
+  font-size: 12px;
+  color: var(--muted);
+}
+.info-genre {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 5px 12px;
+  font-size: 11px;
+}
+.metadata-note a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.detail-recommendations {
+  margin-top: 26px;
+}
+.detail-recommendations h3 {
+  font-size: 18px;
+}
+.detail-recommendations > p {
+  font-size: 11px;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.related-grid button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 0;
+}
+.related-grid button:hover {
+  border-color: var(--accent);
+}
+.related-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  color: white;
+  font-size: 10px;
+  overflow: hidden;
+  background: var(--line);
+  text-align: center;
+}
+.related-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.related-grid time,
+.related-grid small {
+  display: block;
+}
+.saga-order .form-select {
+  max-width: 260px;
+  margin-top: 8px;
+}
+.saga-list {
+  padding-left: 24px;
+}
+.saga-list li {
+  padding: 6px 0;
+}
+.saga-list button {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+}
+.saga-list strong,
+.saga-list small {
+  display: block;
+}
+.saga-list small {
+  color: var(--muted);
+}
+.related-grid strong {
+  display: block;
+  font-size: 13px;
+}
+.related-grid small {
+  font-size: 10px;
+  color: var(--muted);
+}
+.related-grid button > span:last-child {
+  margin-left: auto;
+}
+.recommendation-section {
+  margin: 32px 0;
+}
+.recommendation-reason {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.compact-rating {
+  width: 100%;
+  min-width: 0;
+}
+.star-rating .star-half input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.compact-rating .star-rating-caption {
+  flex-wrap: wrap;
+}
+.compact-rating legend {
+  max-width: 100%;
+  font-size: 10px;
+}
+.compact-rating .star-options {
+  max-width: 100%;
+}
+@media (max-width: 600px) {
+  .catalog-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-navigation {
+    gap: 20px;
+  }
+}
+.detail-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  margin: 22px 0;
+  flex-wrap: wrap;
+}
+.detail-toolbar .detail-navigation {
+  border: 0;
+  margin: 0;
+  flex-shrink: 0;
+  gap: 18px;
+}
+.detail-library-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  padding: 8px 0;
+}
+.detail-library-actions .btn {
+  font-size: 10px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+.detail-library-actions .btn:disabled {
+  opacity: 0.7;
+}
+@media (max-width: 700px) {
+  .detail-toolbar {
+    gap: 0;
+  }
+  .detail-library-actions {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+    padding: 4px 0 14px;
+  }
+  .detail-library-actions .btn {
+    min-height: 38px;
+  }
+}

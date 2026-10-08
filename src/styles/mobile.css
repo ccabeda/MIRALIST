@@ -1,0 +1,51 @@
+@media (max-width: 600px) {
+  .detail-dialog {
+    overflow-x: hidden;
+    overflow-wrap: anywhere;
+  }
+  .detail-library-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .detail-library-actions .btn:first-child {
+    grid-column: 1 / -1;
+  }
+  .detail-library-actions .btn {
+    font-size: 12px;
+    white-space: normal;
+    min-height: 44px;
+  }
+  .detail-dialog .form-control,
+  .detail-dialog .form-select,
+  .library-filters input,
+  .library-filters select,
+  .folder-editor input[type='search'] {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  .close-dialog {
+    min-width: 44px;
+    min-height: 44px;
+    top: 6px;
+    right: 6px;
+  }
+  .folder-heading,
+  .library-results {
+    flex-wrap: wrap;
+  }
+  .folder-heading h2,
+  .folder-card h3,
+  .related-grid strong {
+    overflow-wrap: anywhere;
+  }
+  .library-view .btn,
+  .folder-editor .btn,
+  .release-calendar .btn,
+  .release-month-heading button {
+    min-height: 44px;
+  }
+  .related-grid button > span {
+    min-width: 0;
+  }
+}

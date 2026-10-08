@@ -1,0 +1,71 @@
+.folder-order-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.folder-order-controls button {
+  border: 1px solid var(--line, #45454a);
+  background: transparent;
+  color: inherit;
+  border-radius: 3px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 4px 9px;
+}
+.folder-order-controls > div {
+  display: flex;
+  gap: 5px;
+}
+.folder-order-controls button:hover:not(:disabled),
+.folder-order-controls button:focus-visible {
+  border-color: #ff7a36;
+  color: #ff995c;
+}
+.folder-order-controls button:disabled {
+  opacity: 0.3;
+}
+.folder-order-controls .order-handle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.order-handle:active {
+  cursor: grabbing;
+}
+.order-handle > span:first-child {
+  font-size: 24px;
+  line-height: 1;
+}
+.order-handle > span:last-child {
+  font-size: 12px;
+}
+.orderable-card {
+  min-width: 0;
+  outline: 2px solid transparent;
+  outline-offset: 5px;
+}
+.orderable-card.dragging {
+  opacity: 0.5;
+}
+.orderable-card.drop-target {
+  outline-color: #ff7a36;
+  background: #ff7a3614;
+}
+.order-help {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+[data-theme='light'] .folder-order-controls button:hover:not(:disabled) {
+  color: #a9410a;
+}
+@media (pointer: coarse) {
+  .folder-order-controls button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
