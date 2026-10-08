@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { StarSummary } from '../ui/StarRating.jsx';
+import CardPreview from './CardPreview.jsx';
+import useCardPreview from '../../hooks/useCardPreview.js';
 
 export default function MediaCard({ title: t, entry, onOpen, onAdd }) {
   const [failedCover, setFailedCover] = useState(null);
+  const preview = useCardPreview();
+  const previewId = useId();
   const cover = t.cover;
   const showCover = cover && failedCover !== cover;
   return (
-    <article className="media-card">
+    <article
+      className={`media-card ${preview.position ? 'preview-open' : ''}`}
+      {...preview.handlers}
+      onClickCapture={(event) => {
+        if (!event.target.closest('.card-preview')) preview.close();
+      }}
+    >
       <button
         className={`poster ${showCover ? 'has-cover' : ''}`}
         style={{ '--poster': t.color }}
         onClick={() => onOpen(t)}
         aria-label={`Abrir ficha de ${t.title}`}
+        aria-describedby={preview.position ? previewId : undefined}
       >
         {showCover && (
           <img
@@ -59,6 +70,7 @@ export default function MediaCard({ title: t, entry, onOpen, onAdd }) {
           )}
         </div>
       </div>
+      {preview.position && <CardPreview title={t} side={preview.position} id={previewId} />}
     </article>
   );
 }

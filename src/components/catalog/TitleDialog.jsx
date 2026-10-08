@@ -75,16 +75,24 @@ export default function TitleDialog({
                 Agregá esta obra a tu biblioteca para registrar tu seguimiento.
               </p>
             ) : (
-              <EntryEditor
-                key={selected.id}
-                title={title}
-                entry={current}
-                onSave={(patch) => save(selected.id, patch)}
-                suggestion={suggestion?.id === selected.id ? suggestion : null}
-                onAcceptDate={acceptDate}
-                onDismissDate={onDismissDate}
-                onRemove={() => removeTitle(selected)}
-              />
+              <fieldset className="border-0 p-0 m-0" disabled={resource.loading}>
+                {resource.loading && <p role="status">Comprobando datos de estreno…</p>}
+                {resource.error && (
+                  <p role="alert">
+                    {resource.error} <button onClick={resource.retry}>Reintentar</button>
+                  </p>
+                )}
+                <EntryEditor
+                  key={selected.id}
+                  title={title}
+                  entry={current}
+                  onSave={(patch) => save(selected.id, patch)}
+                  suggestion={suggestion?.id === selected.id ? suggestion : null}
+                  onAcceptDate={acceptDate}
+                  onDismissDate={onDismissDate}
+                  onRemove={() => removeTitle(selected)}
+                />
+              </fieldset>
             )}
           </TitleDetails>
         </>

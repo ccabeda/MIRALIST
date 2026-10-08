@@ -4,6 +4,7 @@ import { seasonsFor } from '../../domain/seasons.js';
 import StarRating from '../ui/StarRating.jsx';
 import { WatchDates, MovieDate } from './WatchDates.jsx';
 import SeasonProgressEditor from './SeasonProgressEditor.jsx';
+import { releaseLimits } from '../../domain/release-limits.js';
 
 export default function EntryEditor({
   title,
@@ -16,6 +17,7 @@ export default function EntryEditor({
 }) {
   const movie = isMovie(title);
   const seasons = seasonsFor(title);
+  const limits = releaseLimits(title);
   return (
     <div className="detail-form">
       <div className="row g-3">
@@ -27,7 +29,9 @@ export default function EntryEditor({
             onChange={(event) => onSave({ status: event.target.value })}
           >
             {statuses.map((status) => (
-              <option key={status}>{status}</option>
+              <option key={status} disabled={!limits.statuses.includes(status)}>
+                {status}
+              </option>
             ))}
           </select>
         </label>
@@ -36,6 +40,7 @@ export default function EntryEditor({
             <label>
               <input
                 type="checkbox"
+                disabled={limits.unreleased}
                 checked={entry.status === 'Completado'}
                 onChange={(event) =>
                   onSave({
@@ -60,7 +65,8 @@ export default function EntryEditor({
               className="form-control"
               type="number"
               min="0"
-              max={hasKnownTotal(title.total) ? title.total : undefined}
+              max={limits.max}
+              disabled={limits.unreleased}
               step="1"
               value={entry.progress}
               aria-describedby="chapter-total"
@@ -76,6 +82,15 @@ export default function EntryEditor({
           </label>
         )}
         {!!seasons.length && <SeasonProgressEditor title={title} entry={entry} onSave={onSave} />}
+        {(limits.unreleased || title.metadata?.status === 'En emisión') && (
+          <p className="col-12 date-help" role="status">
+            {limits.unreleased
+              ? 'Todavía no se estrenó. Solo podés guardarlo como Pendiente.'
+              : limits.confirmed
+                ? `Podés marcar hasta ${limits.max} capítulos emitidos. No se puede completar mientras siga en emisión.`
+                : 'No se pudo confirmar cuántos capítulos salieron. Se mantiene el límite del catálogo; no se puede completar mientras siga en emisión.'}
+          </p>
+        )}
         <StarRating score={entry.score} onChange={(score) => onSave({ score })} />
         {suggestion && (
           <div className="col-12">

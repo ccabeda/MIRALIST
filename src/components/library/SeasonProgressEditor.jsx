@@ -1,5 +1,6 @@
 import React from 'react';
 import { seasonsFor, seasonProgress, updateSeason } from '../../domain/seasons.js';
+import { seasonReleaseMax } from '../../domain/release-limits.js';
 
 export default function SeasonProgressEditor({ title, entry, onSave }) {
   const seasons = seasonsFor(title);
@@ -14,7 +15,8 @@ export default function SeasonProgressEditor({ title, entry, onSave }) {
             className="form-control"
             type="number"
             min="0"
-            max={season.total}
+            max={seasonReleaseMax(title, season)}
+            disabled={seasonReleaseMax(title, season) === 0}
             step="1"
             value={watched[season.number]}
             onChange={(event) =>

@@ -1,5 +1,6 @@
 import { cachedJson } from './http.js';
 import { fromMal, fromTmdb } from './adapters.js';
+import { withReleaseProgress } from './release-progress.js';
 
 export const animeFormats = {
   Todos: '',
@@ -60,7 +61,12 @@ export async function loadTitle(title, options = {}) {
         to: `mal-${node.id}`,
         type: relation_type,
       }));
-    return { title: { ...full, id: title.id }, related, recommendations, relations };
+    return {
+      title: await withReleaseProgress({ ...full, id: title.id }, options),
+      related,
+      recommendations,
+      relations,
+    };
   }
   if (title.providerIds?.tmdb) {
     const kind = title.category === 'Series' ? 'tv' : 'movie';

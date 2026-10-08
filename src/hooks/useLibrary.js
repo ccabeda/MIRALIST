@@ -118,6 +118,11 @@ export default function useLibrary({ titles: availableTitles, notify, onDuplicat
   }
   function changeManyStatuses(ids, status) {
     const next = bulkStatus(library, titles, ids, status);
+    const changed = ids.filter((id) => next[id] !== library[id]).length;
+    if (!changed) {
+      notify('No se cambió el estado: las obras seleccionadas todavía no permiten ese estado.');
+      return;
+    }
     const action = bulkUndo(
       library,
       next,
@@ -128,7 +133,9 @@ export default function useLibrary({ titles: availableTitles, notify, onDuplicat
     pushUndo(action);
     setLibrary(next);
     setSuggestion(null);
-    notify(`Estado actualizado en ${ids.length} obras`);
+    notify(
+      `Estado actualizado en ${changed} obras${changed < ids.length ? '. Se omitieron las que aún no permiten ese estado.' : ''}`,
+    );
   }
   function changeManyFolders(ids, destination, move) {
     const savedIds = ids.filter((id) => Object.hasOwn(library, id));

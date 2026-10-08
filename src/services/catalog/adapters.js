@@ -159,6 +159,8 @@ export function fromTmdb(data, kind) {
       : undefined,
     metadata: {
       provider: 'TMDB',
+      seasonCount:
+        !movie && Number.isInteger(data.number_of_seasons) ? data.number_of_seasons : null,
       url: `https://www.themoviedb.org/${kind}/${data.id}`,
       startDate: day(date),
       endDate: !movie && data.status === 'Ended' ? day(data.last_air_date) : null,
