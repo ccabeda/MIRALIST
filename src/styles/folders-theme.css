@@ -1,0 +1,36 @@
+[data-theme='light'] .library-heading .eyebrow,
+[data-theme='light'] .library-tabs button[aria-pressed='true'],
+[data-theme='light'] .folder-card-caption,
+[data-theme='light'] .selection-heading small {
+  color: #a94a18;
+}
+[data-theme='light'] .folder-card-caption strong {
+  color: #252321;
+}
+[data-theme='light'] .folder-create-card {
+  background: #fff4eb;
+  border-color: #c9a88f;
+  color: #252321;
+}
+[data-theme='light'] .folder-create-card:hover {
+  background: #ffe9d8;
+}
+[data-theme='light'] .folder-create-card > span:last-child {
+  color: #a94a18;
+}
+[data-theme='light'] .folder-plus {
+  border-color: #dbaf8c;
+  color: #a94a18;
+}
+[data-theme='light'] .folder-editor .folder-error {
+  color: #a03520;
+}
+[data-theme='light'] .folder-mosaic {
+  background: #e9e2dc;
+}
+[data-theme='light'] .mosaic-tile:not([style]) {
+  background: #eee7e2;
+}
+[data-theme='light'] .folder-choice:has(input:checked) {
+  background: #fff0e5;
+}

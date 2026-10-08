@@ -8,9 +8,10 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test src/tests/*.test.js",
-    "format": "prettier --write src server vite.config.js index.html package.json .prettierrc.json eslint.config.js",
-    "format:check": "prettier --check src server vite.config.js index.html package.json .prettierrc.json eslint.config.js",
-    "lint": "eslint . --max-warnings 0"
+    "format": "prettier --write src server scripts vite.config.js index.html package.json .prettierrc.json eslint.config.js",
+    "format:check": "prettier --check src server scripts vite.config.js index.html package.json .prettierrc.json eslint.config.js",
+    "lint": "eslint . --max-warnings 0 && npm run check:lines",
+    "check:lines": "node scripts/check-file-lengths.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",

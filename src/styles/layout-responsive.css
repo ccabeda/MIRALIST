@@ -1,0 +1,162 @@
+@media (min-width: 1600px) {
+  .hero {
+    min-height: 540px;
+  }
+  .hero-copy {
+    padding: 48px 60px;
+  }
+  .hero h1 {
+    font-size: 88px;
+  }
+}
+@media (max-width: 1100px) {
+  .sidebar {
+    gap: 25px;
+    padding: 0 25px;
+  }
+  .nav-item {
+    padding: 0 12px;
+  }
+  .hero-copy {
+    width: 75%;
+  }
+  .hero-art {
+    left: 30%;
+  }
+  .hero-footnote {
+    display: none;
+  }
+  .stats-row > div {
+    gap: 10px;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 800px) {
+  .sidebar {
+    height: auto;
+    display: block;
+    padding: 18px 20px 0;
+  }
+  .sidebar nav {
+    height: auto;
+    margin-top: 15px;
+    overflow-x: auto;
+    gap: 0;
+  }
+  .nav-item {
+    padding: 13px 15px;
+  }
+  .brand {
+    font-size: 26px;
+  }
+  .brand-icon {
+    font-size: 34px;
+  }
+  .topbar {
+    height: 62px;
+    padding: 0 20px;
+  }
+  .hero {
+    min-height: 465px;
+  }
+  .hero-copy {
+    width: 100%;
+    padding: 30px;
+  }
+  .hero h1 {
+    font-size: 72px;
+  }
+  .hero-art {
+    left: 20%;
+    opacity: 0.5;
+  }
+  .hero .eyebrow {
+    font-size: 7px;
+  }
+  .hero p {
+    font-size: 11px;
+  }
+  .hero-secondary {
+    font-size: 9px;
+  }
+  .hero-actions {
+    gap: 17px;
+  }
+  .stats-row > div {
+    display: block;
+    padding: 0 6px;
+  }
+  .stats-row strong {
+    display: block;
+  }
+  .stats-row span {
+    font-size: 9px;
+  }
+  .section-heading h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 440px) {
+  .sidebar {
+    padding: 16px 16px 0;
+  }
+  .nav-item {
+    font-size: 11px;
+    padding: 13px 10px;
+  }
+  .topbar {
+    padding: 0 16px;
+  }
+  .hero {
+    min-height: 455px;
+  }
+  .hero-copy {
+    padding: 26px 20px;
+  }
+  .hero h1 {
+    font-size: 69px;
+  }
+  .hero-art {
+    left: 8%;
+    opacity: 0.35;
+  }
+  .hero .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .hero p {
+    font-size: 10px;
+  }
+  .hero-actions {
+    gap: 13px;
+  }
+  .hero-secondary {
+    font-size: 8px;
+  }
+  .hero-secondary span {
+    margin-left: 6px;
+  }
+  .hero .btn-accent {
+    padding: 13px 14px;
+    font-size: 10px;
+  }
+  .hero .btn-accent span {
+    margin-left: 8px;
+  }
+  .hero-categories {
+    font-size: 7px;
+    gap: 13px;
+  }
+  .section-heading h2 {
+    font-size: 18px;
+  }
+  .stats-row span {
+    font-size: 8px;
+  }
+  .stats-row {
+    padding: 15px 0;
+  }
+  .hero-footnote {
+    display: none;
+  }
+}

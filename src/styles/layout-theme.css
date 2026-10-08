@@ -1,0 +1,70 @@
+:root[data-theme='light'] {
+  --accent: #af460f;
+  --muted: #736b63;
+  --line: #dfd8d0;
+  background: #faf8f5;
+  color: #252321;
+}
+[data-theme='light'] body {
+  background: #faf8f5;
+  color: #252321;
+}
+[data-theme='light'] .sidebar {
+  background: #fff;
+}
+[data-theme='light'] .brand {
+  color: #c45117;
+}
+[data-theme='light'] .nav-item.active {
+  background: #fff0e7;
+  color: #a7410b;
+  border-bottom-color: #ff7a36;
+}
+[data-theme='light'] .nav-item:hover {
+  background: #f5ede7;
+}
+[data-theme='light'] .stats-row {
+  background: #f0ebe5;
+  border-color: #dfd8d0;
+}
+[data-theme='light'] .stats-row strong {
+  color: #ad470f;
+}
+[data-theme='light'] .demo-pill {
+  background: #fff0e5;
+  border-color: #e4bea7;
+  color: #94431b;
+}
+[data-theme='light'] .hero .eyebrow {
+  color: #d4cdc8;
+}
+[data-theme='light'] .hero h1 {
+  color: #fff;
+}
+[data-theme='light'] .hero h1 span {
+  color: #ff7a36;
+}
+[data-theme='light'] .text-button,
+[data-theme='light'] .catalog .eyebrow,
+[data-theme='light'] .footer-brand {
+  color: #ac450e;
+}
+[data-theme='light'] .continue-card {
+  background: #fff;
+  border-color: #dfd8d0;
+}
+[data-theme='light'] .add-episode {
+  background: #fff0e5;
+  border-color: #ce8a63;
+  color: #a94c19;
+}
+[data-theme='light'] .progress {
+  background: #e4d9d0;
+}
+[data-theme='light'] .btn-outline-light {
+  border-color: #a79586;
+  color: #704422;
+}
+[data-theme='light'] .btn-outline-light:hover {
+  background: #f8e9de;
+}

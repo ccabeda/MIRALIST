@@ -1,0 +1,151 @@
+.continue-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 13px;
+  background: #1a1e28;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+.mini-poster {
+  flex-shrink: 0;
+  width: 63px;
+  height: 82px;
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(30deg, #101d29, var(--poster));
+  font-family: serif;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+.continue-body {
+  flex: 1;
+  min-width: 0;
+}
+.continue-body small {
+  font-size: 9px;
+  color: var(--muted);
+}
+.title-button {
+  display: block;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.continue-body .title-button {
+  margin: 3px 0 8px;
+}
+.episode-label {
+  font-size: 10px;
+  color: #c9cfda;
+  display: flex;
+  justify-content: space-between;
+}
+.episode-label span {
+  color: var(--muted);
+}
+.progress {
+  height: 3px;
+  background: #353b46;
+  margin-top: 9px;
+}
+.progress-bar {
+  background: var(--accent);
+}
+.add-episode {
+  border: 1px solid #485240;
+  border-radius: 7px;
+  background: #2a3528;
+  color: var(--accent);
+  font-size: 23px;
+  width: 33px;
+  height: 33px;
+  margin: 0 4px;
+}
+.catalog {
+  margin-top: 37px;
+}
+.catalog .eyebrow {
+  display: block;
+  color: #848e9d;
+  font-size: 8px;
+  margin-bottom: 8px;
+}
+.result-count {
+  font-size: 10px;
+  color: #9aa4b3;
+}
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 23px;
+}
+.title-button:hover {
+  color: var(--accent);
+}
+.empty-state {
+  text-align: center;
+  padding: 60px 10px;
+  color: var(--muted);
+}
+.empty-state > span {
+  font-size: 45px;
+}
+.empty-state h3 {
+  font-size: 20px;
+  color: white;
+}
+.empty-state p {
+  font-size: 13px;
+}
+.btn-outline-light {
+  font-size: 12px;
+  border-color: #505969;
+}
+footer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+  margin-top: 30px;
+  color: #737f91;
+  font-size: 9px;
+}
+footer small {
+  margin-left: auto;
+}
+.footer-brand {
+  font-size: 17px;
+  font-weight: 800;
+  color: #aab5a7;
+  letter-spacing: -0.7px;
+}
+.toast-message {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: #d6f4b6;
+  color: #24341a;
+  padding: 13px 22px;
+  border-radius: 9px;
+  box-shadow: 0 5px 30px #0005;
+  z-index: 10;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+  max-width: 90vw;
+}
+.toast-message.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.muted {
+  color: var(--muted);
+}
