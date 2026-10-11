@@ -17,7 +17,7 @@ test('editor, tarjetas y acciones en grupo comparten las reglas de progreso', ()
   assert.equal(completed.status, 'Completado');
   assert.deepEqual(completed, bulkStatus({ test: entry }, [title], ['test'], 'Completado').test);
   assert.equal(applyEntryPatch(title, completed, { progress: 11 }).status, 'Viendo');
-  assert.equal(applyEntryPatch(title, completed, { status: 'Pendiente' }).progress, 0);
+  assert.equal(applyEntryPatch(title, completed, { status: 'Pendiente' }).progress, 12);
   assert.equal(completed.notes, entry.notes);
 });
 
@@ -49,9 +49,31 @@ test('cambiar el estado redistribuye temporadas y conserva notas', () => {
   const completed = applyEntryPatch(series, entry, { status: 'Completado' });
   assert.deepEqual(completed.seasonProgress, { 1: 5, 2: 7 });
   assert.deepEqual(applyEntryPatch(series, completed, { status: 'Pendiente' }).seasonProgress, {
-    1: 0,
-    2: 0,
+    1: 5,
+    2: 7,
   });
+});
+
+test('Pendiente conserva temporadas vistas fuera de orden; reiniciar las pone en cero', () => {
+  const series = {
+    ...title,
+    category: 'Series',
+    seasons: [
+      { number: 1, total: 5 },
+      { number: 2, total: 7 },
+    ],
+  };
+  const previous = {
+    ...entry,
+    progress: 7,
+    seasonProgress: { 1: 0, 2: 7 },
+    startDate: '2025-01-01',
+    finishDate: '2025-02-01',
+  };
+  const pending = applyEntryPatch(series, previous, { status: 'Pendiente' });
+  assert.deepEqual(pending, { ...previous, status: 'Pendiente' });
+  const reset = applyEntryPatch(series, pending, { status: 'Pendiente', progress: 0 });
+  assert.deepEqual(reset, { ...pending, progress: 0, seasonProgress: { 1: 0, 2: 0 } });
 });
 
 test('copias y recarga conservan obras que no están en el catálogo actual', () => {
@@ -66,7 +88,9 @@ test('copias y recarga conservan obras que no están en el catálogo actual', ()
   assert.equal(reloaded.test.score, 3);
   assert.equal(reloaded.test.startDate, '2026-10-01');
   assert.deepEqual(restored.folders, folders);
-  assert.equal(buildCatalog([title], reloaded)[0], title);
+  const refreshed = buildCatalog([title], reloaded)[0];
+  assert.equal(refreshed.total, title.total);
+  assert.equal(refreshed.providerIds.anilist, 123);
   assert.equal(buildCatalog([], { legacy: entry })[0].id, 'legacy');
 });
 

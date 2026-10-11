@@ -21,9 +21,10 @@ test('orden de carpeta mueve en ambos sentidos sin perder miembros y persiste en
   assert.equal(moveTitle(ids, 'missing', 'frieren'), ids);
   const folders = [{ id: 'a', name: 'Orden', titleIds: moveTitle(ids, 'dune', 'frieren') }];
   assert.deepEqual(
-    readBackup(JSON.stringify(makeBackup(initialLibrary, folders, titles)), titles).folders[0]
-      .titleIds,
-    ['dune', 'frieren', 'bebop'],
+    readBackup(JSON.stringify(makeBackup(initialLibrary, folders, titles)), titles).folders.map(
+      (folder) => folder.titleIds,
+    ),
+    [['dune'], ['frieren', 'bebop']],
   );
 });
 
@@ -103,7 +104,7 @@ test('acciones en grupo preservan notas y fechas y sincronizan capítulos', () =
   assert.deepEqual(next.severance.seasonProgress, { 1: 9 });
   assert.equal(next.frieren.finishDate, undefined);
   assert.equal(source.frieren.progress, 12);
-  assert.equal(bulkStatus(next, titles, ['severance'], 'Pendiente').severance.progress, 0);
+  assert.equal(bulkStatus(next, titles, ['severance'], 'Pendiente').severance.progress, 9);
   const folders = [
     { id: 'a', titleIds: ['frieren', 'bebop'] },
     { id: 'b', titleIds: [] },

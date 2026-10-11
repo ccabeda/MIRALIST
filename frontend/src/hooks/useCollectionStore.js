@@ -40,6 +40,7 @@ export default function useCollectionStore(userId, notify) {
     setLibrary: (update) =>
       store.update((previous) => {
         const library = apply(update, previous.library);
+        if (library === previous.library) return previous;
         const folders = previous.folders.map((folder) => ({
           ...folder,
           titleIds: folder.titleIds.filter((id) => Object.hasOwn(library, id)),

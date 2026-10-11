@@ -13,7 +13,6 @@ export function applyEntryPatch(title, entry, patch) {
   if (changedProgress && limits.unreleased) return { ...next, progress: 0, status: 'Pendiente' };
   if (changedStatus) {
     if (patch.status === 'Completado' && hasKnownTotal(total)) next.progress = total;
-    if (patch.status === 'Pendiente') next.progress = 0;
   } else if (changedProgress) {
     if (Number.isInteger(limits.max)) next.progress = Math.min(next.progress, limits.max);
     next = updateProgress(next, 0, total);
@@ -33,7 +32,7 @@ export function applyEntryPatch(title, entry, patch) {
     }
   }
   if (
-    (changedProgress || changedStatus) &&
+    (changedProgress || (changedStatus && patch.status === 'Completado')) &&
     seasonsFor(title).length &&
     !Object.hasOwn(patch, 'seasonProgress')
   )

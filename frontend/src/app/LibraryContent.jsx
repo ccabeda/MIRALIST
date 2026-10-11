@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Hero from '../components/home/Hero.jsx';
 import ContinueWatching from '../components/home/ContinueWatching.jsx';
 import HomeDiscovery from '../components/home/HomeDiscovery.jsx';
@@ -10,6 +10,7 @@ import LibrarySync from '../components/layout/LibrarySync.jsx';
 import CatalogCredits from '../components/layout/CatalogCredits.jsx';
 
 export default function LibraryContent({ auth, workspace }) {
+  const [catalogQueries, setCatalogQueries] = useState({});
   const {
     section,
     navigate,
@@ -88,10 +89,14 @@ export default function LibraryContent({ auth, workspace }) {
           {section === 'Calendario' && (
             <ReleaseCalendar titles={titles} library={library} openTitle={openTitle} />
           )}
-          {section !== 'Mi biblioteca' && section !== 'Calendario' && (
+          {['Anime', 'Series', 'Películas'].includes(section) && (
             <RemoteCatalog
               key={section}
               section={section}
+              query={catalogQueries[section] || ''}
+              setQuery={(query) =>
+                setCatalogQueries((current) => ({ ...current, [section]: query }))
+              }
               titles={titles}
               onTitles={registerTitles}
               library={library}

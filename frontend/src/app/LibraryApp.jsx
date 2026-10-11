@@ -25,6 +25,7 @@ export default function LibraryApp({ auth, loginIntent, setLoginIntent }) {
       <Sidebar section={section} navigate={navigate} library={library}>
         {auth.user && sync.ready && (
           <Notifications
+            onEpisodeUpdate={workspace.onEpisodeUpdate}
             titles={titles}
             library={library}
             openTitle={openTitle}

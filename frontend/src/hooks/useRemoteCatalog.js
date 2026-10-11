@@ -1,9 +1,10 @@
+import { createRetryTracker } from '../services/catalog/retry.js';
 import { useEffect, useRef, useState } from 'react';
 import { catalogConfiguration, searchCatalog } from '../services/catalog/providers.js';
 
 export default function useRemoteCatalog({ category, query, format, page, order, onTitles }) {
   const [attempt, setAttempt] = useState(0);
-  const lastAttempt = useRef(0);
+  const retryTracker = useRef(createRetryTracker());
   const [result, setResult] = useState(null);
   const [progress, setProgress] = useState(null);
   const key = JSON.stringify([category, query.trim(), format, page, order, attempt]);
@@ -12,17 +13,19 @@ export default function useRemoteCatalog({ category, query, format, page, order,
     if (idle) return;
     let active = true;
     const timer = setTimeout(async () => {
+      const force = retryTracker.current(
+        JSON.stringify([category, query.trim(), format, page, order]),
+        attempt,
+      );
       try {
         {
-          const config = await catalogConfiguration({ force: attempt > 0 });
+          const config = await catalogConfiguration({ force });
           if (!(category === 'Anime' ? config.mal : config.tmdb)) {
             if (active) setResult({ key, items: [], configured: false });
             return;
           }
         }
         if (!active) return;
-        const force = attempt > lastAttempt.current;
-        lastAttempt.current = attempt;
         const data = await searchCatalog(
           { category, query, format, page, order },
           {

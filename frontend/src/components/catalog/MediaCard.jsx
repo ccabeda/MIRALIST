@@ -55,7 +55,10 @@ export default function MediaCard({ title: t, entry, onOpen, onAdd }) {
         </button>
         <div className="card-bottom">
           {entry ? (
-            <button className="saved-state" onClick={() => onOpen(t)}>
+            <button
+              className={`saved-state${entry.status === 'Completado' ? ' is-completed' : ''}`}
+              onClick={() => onOpen(t)}
+            >
               <span /> {entry.status}
             </button>
           ) : (

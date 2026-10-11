@@ -47,6 +47,15 @@
   border-radius: 5px;
   font-size: 10px;
 }
+.progress-reset {
+  margin-top: 18px;
+}
+.progress-reset p {
+  font-size: 13px;
+}
+.progress-reset button + button {
+  margin-left: 18px;
+}
 .detail-footer {
   display: flex;
   justify-content: space-between;

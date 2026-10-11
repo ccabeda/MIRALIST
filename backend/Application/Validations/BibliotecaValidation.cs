@@ -65,6 +65,8 @@ public static class BibliotecaValidation
             Require(folder.TitleIds is not null && folder.TitleIds.Count <= data.Library.Count
                 && folder.TitleIds.Distinct(StringComparer.Ordinal).Count() == folder.TitleIds.Count
                 && folder.TitleIds.All(data.Library.ContainsKey), "La carpeta contiene referencias inválidas.");
+            Require(folder.TitleIds!.Select(id => Texto(data.Library[id].Catalog, "category") == "Anime")
+                .Distinct().Count() <= 1, "Las carpetas de anime no pueden contener series o películas, y viceversa.");
         }
     }
 

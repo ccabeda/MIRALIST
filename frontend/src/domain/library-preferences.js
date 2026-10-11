@@ -1,4 +1,5 @@
 import { statuses } from './library.js';
+import { folderOrders } from './folder-sorting.js';
 export const defaultPreferences = {
   section: 'anime',
   query: '',
@@ -6,6 +7,7 @@ export const defaultPreferences = {
   status: 'Todos',
   favoritesOnly: false,
   order: 'recent',
+  folderOrder: 'original',
   view: 'all',
   activeFolderId: null,
 };
@@ -25,6 +27,7 @@ export function parsePreferences(raw) {
         ? item.order
         : 'recent',
       view: item.view === 'folders' ? 'folders' : 'all',
+      folderOrder: Object.hasOwn(folderOrders, item.folderOrder) ? item.folderOrder : 'original',
       activeFolderId: typeof item.activeFolderId === 'string' ? item.activeFolderId : null,
     };
   } catch {

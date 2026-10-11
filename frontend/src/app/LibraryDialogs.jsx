@@ -57,6 +57,7 @@ export default function LibraryDialogs({ workspace }) {
         <FolderPicker
           key={folderTarget.id}
           title={folderTarget}
+          titles={titles}
           folders={folders}
           setFolders={setFolders}
           onClose={() => setFolderTarget(null)}

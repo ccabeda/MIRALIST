@@ -1,4 +1,6 @@
 import { handleMalRequest } from './mal-api.js';
+import { createMalClient } from './mal-client.js';
+import { catalogFailure } from './catalog-failure.js';
 import { createAnimeSchedule } from './anime-schedule.js';
 
 export function createCatalogApi({
@@ -8,6 +10,7 @@ export function createCatalogApi({
   fetcher = fetch,
 } = {}) {
   const schedule = createAnimeSchedule({ token: animeScheduleToken, fetcher });
+  const malRequest = createMalClient({ clientId: malClientId, fetcher });
   const send = (res, status, data) => {
     res.writeHead(status, {
       'Content-Type': 'application/json; charset=utf-8',
@@ -22,7 +25,12 @@ export function createCatalogApi({
     if (url.pathname === '/api/catalog/config')
       return send(res, 200, { tmdb: !!token.trim(), mal: !!malClientId.trim() });
     if (url.pathname === '/api/catalog/mal')
-      return handleMalRequest(url, res, send, { clientId: malClientId, fetcher });
+      return handleMalRequest(url, res, send, {
+        clientId: malClientId,
+        request: malRequest,
+        priority:
+          req.headers?.['x-catalog-priority'] === 'background' ? 'background' : 'interactive',
+      });
     if (url.pathname === '/api/catalog/schedule') return schedule(url, res, send);
     if (url.pathname !== '/api/catalog/tmdb') return send(res, 404, { error: 'Not found' });
     if (!token.trim()) return send(res, 503, { error: 'TMDB_NOT_CONFIGURED' });
@@ -61,8 +69,9 @@ export function createCatalogApi({
         return send(res, response.status === 429 ? 429 : 502, { error: 'TMDB_UNAVAILABLE' });
       }
       send(res, 200, await response.json());
-    } catch {
-      send(res, 502, { error: 'TMDB_UNAVAILABLE' });
+    } catch (error) {
+      const failure = catalogFailure(error, 'TMDB');
+      send(res, failure.status, { error: failure.error });
     }
   };
 }

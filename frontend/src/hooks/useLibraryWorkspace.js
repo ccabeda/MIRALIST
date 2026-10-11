@@ -44,6 +44,7 @@ export default function useLibraryWorkspace(auth, loginIntent, setLoginIntent) {
     changeManyFolders,
     importCollection,
     sync,
+    onEpisodeUpdate,
   } = useLibrary({
     userId: auth.user?.id,
     titles: availableTitles,
@@ -102,6 +103,7 @@ export default function useLibraryWorkspace(auth, loginIntent, setLoginIntent) {
   }
   const watching = titles.filter((t) => library[t.id]?.status === 'Viendo');
   return {
+    onEpisodeUpdate,
     theme,
     setTheme,
     section,

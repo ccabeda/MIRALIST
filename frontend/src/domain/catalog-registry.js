@@ -18,6 +18,7 @@ export function mergeCatalog(current, incoming) {
         : {
             ...previous,
             ...title,
+            metadata: { ...previous.metadata, ...title.metadata },
             id: previous.id,
             franchise: previous.franchise || title.franchise,
             aliases: [

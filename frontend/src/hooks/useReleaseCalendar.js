@@ -1,3 +1,4 @@
+import { createRetryTracker } from '../services/catalog/retry.js';
 import { useEffect, useRef, useState } from 'react';
 import { calendarTitles, calendarEvents } from '../domain/release-calendar.js';
 import { loadInBatches } from '../services/catalog/discovery.js';
@@ -10,10 +11,11 @@ export default function useReleaseCalendar(titles, library) {
   latest.current = selected;
   const key = JSON.stringify(selected.map((title) => title.id).sort());
   const [attempt, setAttempt] = useState(0);
+  const retryTracker = useRef(createRetryTracker());
   const [result, setResult] = useState(null);
   useEffect(() => {
     let active = true;
-    const options = { force: attempt > 0, refreshAt: Date.now() };
+    const options = { force: retryTracker.current(key, attempt), refreshAt: Date.now() };
     loadInBatches(
       latest.current,
       async (title) => {

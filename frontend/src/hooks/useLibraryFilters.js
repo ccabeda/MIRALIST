@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { storageKeys, readStorage, writeStorage } from '../services/storage.js';
 import { parseSectionPreferences } from '../domain/library-preferences.js';
 import { sortTitles } from '../domain/title-sorting.js';
+import { sortFolders } from '../domain/folder-sorting.js';
 import { matchesTitle } from '../domain/organization.js';
 import { belongsToSection, sectionFolders } from '../domain/library-sections.js';
 
@@ -13,6 +14,8 @@ export default function useLibraryFilters({ library, titles, folders, selecting 
   const { favoritesOnly, view, activeFolderId, query, status, category } =
     preferences.sections[section];
   const storedOrder = preferences.sections[section].order;
+  const folderOrder = preferences.sections[section].folderOrder;
+  const setFolderOrder = (folderOrder) => update({ folderOrder });
   function update(patch) {
     setPreferences((current) => ({
       ...current,
@@ -60,8 +63,11 @@ export default function useLibraryFilters({ library, titles, folders, selecting 
     visibleTitles.sort(
       (a, b) => activeFolder.titleIds.indexOf(a.id) - activeFolder.titleIds.indexOf(b.id),
     );
-  const visibleFolders = scopedFolders.filter((folder) =>
-    folder.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()),
+  const visibleFolders = sortFolders(
+    scopedFolders.filter((folder) =>
+      folder.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()),
+    ),
+    folderOrder,
   );
   function resetFilters() {
     update({ favoritesOnly: false, query: '', status: 'Todos', category: 'Todos' });
@@ -100,6 +106,8 @@ export default function useLibraryFilters({ library, titles, folders, selecting 
       screen: allSavedTitles.filter((title) => belongsToSection(title, 'screen')).length,
     },
     scopedFolders,
+    folderOrder,
+    setFolderOrder,
     favoritesOnly,
     setFavoritesOnly,
     order,

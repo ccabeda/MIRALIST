@@ -17,6 +17,16 @@
 .favorite-folder-picker p strong {
   color: #edf0f4;
 }
+.favorite-folder-search {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+  font-size: 13px;
+}
+.favorite-folder-search input {
+  min-height: 44px;
+  font-size: 16px;
+}
 .favorite-folder-options {
   max-height: 230px;
   overflow-y: auto;

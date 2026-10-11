@@ -4,9 +4,45 @@ import { releaseLimits, seasonReleaseMax } from '../domain/release-limits.js';
 import { applyEntryPatch } from '../domain/entry-updates.js';
 import { bulkStatus } from '../domain/bulk-actions.js';
 import { withReleaseProgress } from '../services/catalog/release-progress.js';
+import { updateSeason } from '../domain/seasons.js';
 
 const title = { id: 'test', category: 'Anime', format: 'TV', total: 12 };
 const entry = { status: 'Pendiente', progress: 0, score: 0, notes: 'Conservar' };
+
+test('Black Mirror permite el sexto capítulo de temporada 7 aunque la serie pueda continuar', () => {
+  const series = {
+    ...title,
+    category: 'Series',
+    total: 33,
+    seasons: [3, 4, 6, 6, 3, 5, 6].map((total, index) => ({ number: index + 1, total })),
+    metadata: {
+      status: 'En emisión',
+      lastEpisodeSeason: 7,
+      lastEpisodeNumber: 6,
+      lastEpisodeDate: '2025-04-10',
+    },
+  };
+  const previous = {
+    ...entry,
+    status: 'Viendo',
+    progress: 32,
+    seasonProgress: { 1: 3, 2: 4, 3: 6, 4: 6, 5: 3, 6: 5, 7: 5 },
+  };
+  const change = updateSeason(series, previous, 7, 6);
+  const saved = applyEntryPatch(series, previous, {
+    progress: change.progress,
+    seasonProgress: change.seasonProgress,
+  });
+  assert.equal(saved.progress, 33);
+  assert.equal(saved.seasonProgress[7], 6);
+  assert.equal(saved.status, 'Completado');
+  assert.equal(applyEntryPatch(series, previous, { status: 'Completado' }).progress, 33);
+  const future = { ...series, total: 39, seasons: [...series.seasons, { number: 8, total: 6 }] };
+  assert.equal(seasonReleaseMax(future, future.seasons[7]), 0);
+  assert.equal(releaseLimits(future).statuses.includes('Completado'), false);
+  const unknown = { ...series, metadata: { status: 'En emisión' } };
+  assert.equal(releaseLimits(unknown).statuses.includes('Completado'), false);
+});
 
 test('sin estreno solo admite Pendiente, incluso desde acciones en grupo', () => {
   const upcoming = { ...title, metadata: { status: 'Próximamente' } };

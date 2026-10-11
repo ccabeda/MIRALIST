@@ -43,7 +43,7 @@ public class BibliotecaTests
             ["tmdb-2"] = new EntradaDto
             {
                 Status = "Completado", Progress = 1, Score = 9, WatchedDate = "2026-10-02",
-                Catalog = JsonSerializer.SerializeToElement(new { id = "tmdb-2", title = "Película", category = "Películas", format = "Película", total = 1, providerIds = new { tmdb = 2 } })
+                Catalog = JsonSerializer.SerializeToElement(new { id = "tmdb-2", title = "Película", category = "Anime", format = "Película", total = 1, providerIds = new { tmdb = 2 } })
             }
         },
         Folders = [new() { Id = "saga", Name = "Mi saga", TitleIds = ["tmdb-2", "mal-1"] }]

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { validateFolderName } from '../../domain/folders.js';
 import { matchesTitle } from '../../domain/organization.js';
+import { validateFolderSections } from '../../domain/library-sections.js';
 
 export default function FolderEditor({
   editor,
@@ -42,6 +43,17 @@ export default function FolderEditor({
       name: name.trim(),
       titleIds: chosen.filter((id) => Object.hasOwn(library, id)),
     };
+    try {
+      validateFolderSections(
+        [folder],
+        Object.values(library)
+          .map((entry) => entry.catalog)
+          .filter(Boolean),
+      );
+    } catch (error) {
+      setError(error.message);
+      return;
+    }
     setFolders((current) =>
       editor.id
         ? current.map((item) => (item.id === editor.id ? folder : item))

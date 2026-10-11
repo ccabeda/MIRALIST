@@ -25,7 +25,14 @@ export function releaseLimits(title, now = new Date()) {
       : hasKnownTotal(total)
         ? total
         : undefined;
-  const incomplete = ongoing || (Number.isInteger(max) && hasKnownTotal(total) && max < total);
+  const allSeriesEpisodesAired =
+    title.category === 'Series' &&
+    hasKnownTotal(total) &&
+    Number.isInteger(aired) &&
+    aired >= total;
+  const incomplete =
+    (ongoing && !allSeriesEpisodesAired) ||
+    (Number.isInteger(max) && hasKnownTotal(total) && max < total);
   return {
     max,
     unreleased: !!unreleased,

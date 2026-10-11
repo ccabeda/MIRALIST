@@ -261,6 +261,7 @@ test('MyAnimeList usa Client ID en el servidor, pagina por offset y valida las c
   assert.equal(seen[0].url.pathname, '/v2/anime');
   assert.equal(seen[0].url.searchParams.get('q'), 'dra');
   assert.equal(seen[0].url.searchParams.get('offset'), '24');
+  assert.equal(seen[0].url.searchParams.get('nsfw'), 'true');
   assert.equal(seen[0].options.headers['X-MAL-CLIENT-ID'], 'private-test-id');
   assert.ok(!JSON.stringify(response).includes('private-test-id'));
   await callApi(handler, '/api/catalog/mal?id=21');

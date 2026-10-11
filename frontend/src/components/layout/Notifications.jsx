@@ -3,8 +3,8 @@ import useNotifications from '../../hooks/useNotifications.js';
 import { relativeNotificationDate } from '../../domain/notifications.js';
 import RelatedCover from '../catalog/RelatedCover.jsx';
 
-export default function Notifications({ titles, library, openTitle, userId }) {
-  const feed = useNotifications(titles, library, userId);
+export default function Notifications({ titles, library, openTitle, userId, onEpisodeUpdate }) {
+  const feed = useNotifications(titles, library, userId, onEpisodeUpdate);
   const [open, setOpen] = useState(false);
   const [now, setNow] = useState(Date.now());
   const dialog = useRef(null);

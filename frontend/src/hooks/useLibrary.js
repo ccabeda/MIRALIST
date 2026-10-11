@@ -8,6 +8,8 @@ import { bulkStatus, bulkFolders } from '../domain/bulk-actions.js';
 import { mergeBackup } from '../domain/backup.js';
 import { suggestTitleDate } from '../domain/watch-dates.js';
 import { bulkUndo, canonicalTitle } from '../domain/organization.js';
+import { folderAccepts, separateMixedFolders } from '../domain/library-sections.js';
+import { reopenForNewEpisodes } from '../domain/new-episode-status.js';
 
 const blank = {
   status: 'Pendiente',
@@ -127,6 +129,18 @@ export default function useLibrary({ titles: availableTitles, notify, onDuplicat
   }
   function changeManyFolders(ids, destination, move) {
     const savedIds = ids.filter((id) => Object.hasOwn(library, id));
+    const folder = folders.find((item) => item.id === destination);
+    const chosenTitles = titles.filter((title) => savedIds.includes(title.id));
+    if (!folder || !chosenTitles.length) return;
+    if (
+      !chosenTitles.every((title) => folderAccepts(folder, title, titles)) ||
+      chosenTitles.some(
+        (title) => (title.category === 'Anime') !== (chosenTitles[0].category === 'Anime'),
+      )
+    ) {
+      notify('Las carpetas de anime no admiten series o películas, y viceversa.');
+      return;
+    }
     const next = bulkFolders(folders, savedIds, destination, move);
     const action = bulkUndo(
       library,
@@ -141,6 +155,7 @@ export default function useLibrary({ titles: availableTitles, notify, onDuplicat
   }
   function importCollection(backup, useImported) {
     const next = mergeBackup(library, folders, backup, useImported);
+    next.folders = separateMixedFolders(next.folders, buildCatalog(titles, next.library));
     setLibrary(next.library);
     setFolders(next.folders);
     setSuggestion(null);
@@ -149,6 +164,7 @@ export default function useLibrary({ titles: availableTitles, notify, onDuplicat
   }
 
   return {
+    onEpisodeUpdate: (update) => setLibrary((current) => reopenForNewEpisodes(current, update)),
     sync: store,
     titles,
     library,

@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { addTitleToFolders, validateFolderName } from '../../domain/folders.js';
+import { matchesTitle } from '../../domain/organization.js';
+import { folderAccepts } from '../../domain/library-sections.js';
 
-export default function FolderPicker({ title, folders, setFolders, onClose, notify }) {
+export default function FolderPicker({ title, titles, folders, setFolders, onClose, notify }) {
   const dialog = useRef(null);
   const [chosen, setChosen] = useState([]);
+  const [query, setQuery] = useState('');
+  const compatibleFolders = folders.filter((folder) => folderAccepts(folder, title, titles));
+  const visibleFolders = compatibleFolders.filter((folder) =>
+    matchesTitle({ title: folder.name }, query),
+  );
   const [creating, setCreating] = useState(false);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
@@ -16,7 +23,15 @@ export default function FolderPicker({ title, folders, setFolders, onClose, noti
     onClose();
   }
   function saveExisting() {
-    setFolders((current) => addTitleToFolders(current, title.id, chosen));
+    setFolders((current) =>
+      addTitleToFolders(
+        current,
+        title.id,
+        chosen.filter((id) =>
+          current.some((folder) => folder.id === id && folderAccepts(folder, title, titles)),
+        ),
+      ),
+    );
     notify(
       chosen.length === 1
         ? 'Título guardado también en la carpeta'
@@ -56,8 +71,29 @@ export default function FolderPicker({ title, folders, setFolders, onClose, noti
       <p>
         <strong>{title.title}</strong> · Organizalo en una o varias carpetas.
       </p>
+      <p>
+        Las carpetas de anime se mantienen separadas de las de series y películas. Una carpeta vacía
+        admite cualquiera de los dos grupos.
+      </p>
+      {folders.length > 0 && (
+        <label className="favorite-folder-search">
+          Buscar carpeta
+          <input
+            type="search"
+            className="form-control"
+            placeholder="Escribí el nombre de una carpeta…"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
+      )}
+      {folders.length > 0 && !visibleFolders.length && (
+        <p className="favorite-folder-empty" role="status">
+          No hay carpetas que coincidan con tu búsqueda.
+        </p>
+      )}
       <div className="favorite-folder-options" aria-label="Carpetas disponibles">
-        {folders.map((folder) => {
+        {visibleFolders.map((folder) => {
           const alreadySaved = folder.titleIds.includes(title.id);
           return (
             <label

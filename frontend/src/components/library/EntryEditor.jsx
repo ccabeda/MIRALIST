@@ -5,6 +5,7 @@ import StarRating from '../ui/StarRating.jsx';
 import { WatchDates, MovieDate } from './WatchDates.jsx';
 import SeasonProgressEditor from './SeasonProgressEditor.jsx';
 import { releaseLimits } from '../../domain/release-limits.js';
+import ResetProgress from './ResetProgress.jsx';
 
 export default function EntryEditor({
   title,
@@ -45,6 +46,7 @@ export default function EntryEditor({
                 onChange={(event) =>
                   onSave({
                     status: event.target.checked ? 'Completado' : 'Pendiente',
+                    progress: event.target.checked ? 1 : 0,
                   })
                 }
               />{' '}
@@ -86,9 +88,11 @@ export default function EntryEditor({
           <p className="col-12 date-help" role="status">
             {limits.unreleased
               ? 'Todavía no se estrenó. Solo podés guardarlo como Pendiente.'
-              : limits.confirmed
-                ? `Podés marcar hasta ${limits.max} capítulos emitidos. No se puede completar mientras siga en emisión.`
-                : 'No se pudo confirmar cuántos capítulos salieron. Se mantiene el límite del catálogo; no se puede completar mientras siga en emisión.'}
+              : limits.statuses.includes('Completado')
+                ? 'Todos los capítulos del catálogo ya se emitieron. Podés marcarla como completada aunque la serie pueda continuar.'
+                : limits.confirmed
+                  ? `Podés marcar hasta ${limits.max} capítulos emitidos. No se puede completar mientras siga en emisión.`
+                  : 'No se pudo confirmar cuántos capítulos salieron. Se mantiene el límite del catálogo; no se puede completar mientras siga en emisión.'}
           </p>
         )}
         <StarRating score={entry.score} onChange={(score) => onSave({ score })} />
@@ -134,6 +138,7 @@ export default function EntryEditor({
           Quitar de mi lista
         </button>
       </div>
+      <ResetProgress entry={entry} onSave={onSave} />
     </div>
   );
 }

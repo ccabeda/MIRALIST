@@ -1,4 +1,6 @@
 import { hasKnownTotal, isRecord, safeId } from './entry-fields.js';
+import { mergeCatalog } from './catalog-registry.js';
+import { canonicalTitle } from './organization.js';
 
 // A saved title is independent of the current search results or provider availability.
 export function normalizeTitle(value) {
@@ -60,10 +62,15 @@ export function normalizeTitle(value) {
 export function buildCatalog(available, library) {
   const byId = new Map(available.map((title) => [title.id, title]));
   for (const [id, entry] of Object.entries(library)) {
-    if (byId.has(id)) continue;
     const saved = normalizeTitle(entry.catalog);
     const title = saved?.id === id ? saved : normalizeTitle({ id, title: `Obra guardada (${id})` });
-    if (title) byId.set(id, title);
+    if (!title) continue;
+    const availableTitle = canonicalTitle(title, [...byId.values()]);
+    if (!availableTitle) byId.set(id, title);
+    else if (saved?.id === id) {
+      if (availableTitle.id !== id) byId.delete(availableTitle.id);
+      byId.set(id, mergeCatalog([title], [availableTitle])[0]);
+    }
   }
   return [...byId.values()];
 }

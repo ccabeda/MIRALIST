@@ -14,10 +14,11 @@ const summaryFields = [
   'average_episode_duration',
   'studios',
   'broadcast',
+  'nsfw',
 ].join(',');
 
 // Only public catalog reads; user lists and OAuth credentials are not involved.
-export async function handleMalRequest(url, res, send, { clientId, fetcher }) {
+export async function handleMalRequest(url, res, send, { clientId, request, priority }) {
   if (!clientId.trim()) return send(res, 503, { error: 'MAL_NOT_CONFIGURED' });
   const id = url.searchParams.get('id');
   const query = (url.searchParams.get('query') || '').trim();
@@ -40,22 +41,15 @@ export async function handleMalRequest(url, res, send, { clientId, fetcher }) {
     target.searchParams.set('q', query);
     target.searchParams.set('limit', '24');
     target.searchParams.set('offset', String((page - 1) * 24));
-    target.searchParams.set('nsfw', 'false');
+    // MAL also hides non-explicit "gray" titles when this is false.
+    target.searchParams.set('nsfw', 'true');
   }
-  try {
-    const response = await fetcher(target, {
-      headers: { 'X-MAL-CLIENT-ID': clientId.trim(), Accept: 'application/json' },
-      signal: AbortSignal.timeout(12000),
+  const result = await request(target, priority);
+  if (result.retryAfter) res.setHeader('Retry-After', result.retryAfter);
+  if (!id && result.status === 200 && Array.isArray(result.body.data))
+    return send(res, 200, {
+      ...result.body,
+      data: result.body.data.filter(({ node }) => node?.nsfw !== 'black'),
     });
-    if (!response.ok) {
-      if ([401, 403].includes(response.status))
-        return send(res, 503, { error: 'MAL_INVALID_CLIENT_ID' });
-      if (response.status === 429)
-        res.setHeader('Retry-After', response.headers.get('Retry-After') || '60');
-      return send(res, response.status === 429 ? 429 : 502, { error: 'MAL_UNAVAILABLE' });
-    }
-    return send(res, 200, await response.json());
-  } catch {
-    return send(res, 502, { error: 'MAL_UNAVAILABLE' });
-  }
+  return send(res, result.status, result.body);
 }

@@ -19,9 +19,10 @@ export default function SeasonProgressEditor({ title, entry, onSave }) {
             disabled={seasonReleaseMax(title, season) === 0}
             step="1"
             value={watched[season.number]}
-            onChange={(event) =>
-              onSave(updateSeason(title, entry, season.number, event.target.value))
-            }
+            onChange={(event) => {
+              const next = updateSeason(title, entry, season.number, event.target.value);
+              onSave({ progress: next.progress, seasonProgress: next.seasonProgress });
+            }}
           />
           <small>de {season.total} capítulos</small>
         </label>

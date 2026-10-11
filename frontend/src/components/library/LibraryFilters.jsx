@@ -1,5 +1,6 @@
 import React from 'react';
 import { statuses } from '../../domain/library.js';
+import { folderOrders } from '../../domain/folder-sorting.js';
 export default function LibraryFilters({
   section,
   folderOverview,
@@ -14,6 +15,8 @@ export default function LibraryFilters({
   order,
   setOrder,
   activeFolder,
+  folderOrder,
+  setFolderOrder,
 }) {
   return (
     <>
@@ -58,6 +61,24 @@ export default function LibraryFilters({
           </>
         )}
       </div>
+      {folderOverview && (
+        <div className="collection-controls">
+          <label className="sort-control">
+            Ordenar carpetas
+            <select
+              className="form-select"
+              value={folderOrder}
+              onChange={(event) => setFolderOrder(event.target.value)}
+            >
+              {Object.entries(folderOrders).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )}
       {!folderOverview && (
         <div className="collection-controls">
           <label className="favorites-filter">

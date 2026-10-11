@@ -3,6 +3,7 @@ import { buildCatalog, normalizeTitle } from './catalog.js';
 import { isRecord as record, safeId } from './entry-fields.js';
 import { restoreFolder } from './folders.js';
 import { canonicalTitle } from './organization.js';
+import { separateMixedFolders } from './library-sections.js';
 
 export function makeBackup(library, folders, titles = []) {
   const catalog = buildCatalog(titles, library)
@@ -82,7 +83,11 @@ export function readBackup(text, titles) {
       titleIds: [...new Set(folder.titleIds.map((id) => idMap.get(id)))],
     };
   });
-  return { library, folders, duplicateCount };
+  return {
+    library,
+    folders: separateMixedFolders(folders, buildCatalog(titles, library)),
+    duplicateCount,
+  };
 }
 export function mergeBackup(currentLibrary, currentFolders, backup, useImported = false) {
   const library = useImported

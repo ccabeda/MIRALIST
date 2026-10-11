@@ -98,8 +98,8 @@ export default function BulkActions({
         </button>
       </div>
       <p className="tools-help">
-        Completado marca todos los capítulos; Pendiente los deja en cero. Las fechas existentes se
-        conservan. Mover nunca quita obras de Todos.
+        Completado marca todos los capítulos; Pendiente conserva el progreso. Las fechas existentes
+        se conservan. Mover nunca quita obras de Todos.
       </p>
       {!folders.length && (
         <p className="tools-help">

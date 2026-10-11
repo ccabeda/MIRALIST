@@ -203,6 +203,15 @@
   object-fit: cover;
   z-index: -2;
 }
+.saved-state.is-completed {
+  color: #6cdb95;
+}
+.saved-state.is-completed span {
+  background: currentColor;
+}
+[data-theme='light'] .saved-state.is-completed {
+  color: #18743a;
+}
 .has-cover:after {
   background: linear-gradient(0deg, #000b, transparent 40%);
   z-index: -1;
