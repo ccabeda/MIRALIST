@@ -1,7 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
-import { createCatalogApi } from './server/catalog-api.js';
+import { createCatalogApi } from './frontend/server/catalog-api.js';
 
 export default defineConfig(({ mode }) => {
+  const backend = process.env.MIRALIST_API_URL || 'http://127.0.0.1:5080';
   const env = loadEnv(mode, process.cwd(), ['TMDB_', 'MAL_', 'ANIMESCHEDULE_']);
   const middleware = createCatalogApi({
     token: env.TMDB_READ_TOKEN || process.env.TMDB_READ_TOKEN,
@@ -9,6 +10,14 @@ export default defineConfig(({ mode }) => {
     animeScheduleToken: env.ANIMESCHEDULE_TOKEN || process.env.ANIMESCHEDULE_TOKEN,
   });
   return {
+    root: 'frontend',
+    envDir: '..',
+    server: {
+      proxy: { '/api/auth': backend, '/api/library': backend },
+    },
+    preview: {
+      proxy: { '/api/auth': backend, '/api/library': backend },
+    },
     plugins: [
       {
         name: 'miralist-catalog',

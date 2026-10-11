@@ -1,0 +1,24 @@
+.library-sync {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+}
+.library-sync p {
+  margin: 0 0 8px;
+}
+.library-sync p:last-child {
+  margin-bottom: 0;
+}
+.sync-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 600px) {
+  .library-sync {
+    padding: 12px;
+  }
+}

@@ -6,3 +6,8 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+.tools/
+**/bin/
+**/obj/
+backend/API/App_Data/
+TestResults/

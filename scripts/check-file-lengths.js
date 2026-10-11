@@ -3,8 +3,29 @@ import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const excluded = new Set(['node_modules', 'dist', '.git']);
-const extensions = new Set(['.js', '.jsx', '.css', '.html', '.json', '.md', '.svg']);
+const excluded = new Set([
+  'node_modules',
+  'dist',
+  '.git',
+  '.tools',
+  'bin',
+  'obj',
+  'App_Data',
+  'TestResults',
+]);
+const extensions = new Set([
+  '.js',
+  '.jsx',
+  '.css',
+  '.html',
+  '.json',
+  '.md',
+  '.svg',
+  '.cs',
+  '.csproj',
+  '.props',
+  '.ps1',
+]);
 const limit = 400;
 const failures = [];
 

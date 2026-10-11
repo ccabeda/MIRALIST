@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/Domain/Miralist.Domain.csproj" />
+    <Project Path="backend/Application/Miralist.Application.csproj" />
+    <Project Path="backend/Infrastructure/Miralist.Infrastructure.csproj" />
+    <Project Path="backend/API/Miralist.API.csproj" />
+    <Project Path="backend/Tests/Miralist.API.Tests/Miralist.API.Tests.csproj" />
+  </Folder>
+</Solution>
